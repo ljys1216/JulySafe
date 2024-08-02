@@ -1,0 +1,25 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main  # 监听对 main 分支的推送
+  pull_request:
+    branches:
+      - main  # 监听对 main 分支的拉取请求
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 使用最新的 Ubuntu 环境
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2  # 检出代码
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1  # 设置 Java 环境
+        with:
+          java-version: '8'  # 指定 JDK 版本
+
+      - name: Build with Gradle
+        run: ./gradlew build  # 运行 Gradle 构建命令
